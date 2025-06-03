@@ -14,16 +14,24 @@ class Publisher(BaseModel):
 
     @validates('name')
     def validate_name(self, key, name):
+        """Validate publisher name meets length requirements."""
         return self.validate_string_length('Publisher name', name, min_length=2)
 
     @validates('description')
     def validate_description(self, key, description):
+        """Validate publisher description meets length requirements."""
         return self.validate_string_length('Description', description, min_length=10, allow_none=True)
 
     def __repr__(self):
+        """Return string representation of the Publisher object."""
         return f'<Publisher {self.name}>'
 
     def to_dict(self):
+        """Convert Publisher object to dictionary representation.
+        
+        Returns:
+            dict: Dictionary containing publisher data with game count
+        """
         return {
             'id': self.id,
             'name': self.name,
